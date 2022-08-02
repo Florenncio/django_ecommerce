@@ -17,7 +17,7 @@ def test_dashboard_admin_login (live_server, db_fixture_setup, chrome_browser_in
     submit = browser.find_element(By.XPATH, '//input[@value="Log in"]')
 
     user_name.send_keys("admin")
-    user_password.send_keys("Nando,3252")
+    user_password.send_keys("password")
     submit.click()
 
     assert "Site administration" in browser.page_source
