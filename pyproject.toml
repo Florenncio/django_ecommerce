@@ -8,6 +8,7 @@ authors = ["Fernando Florencio <nandoflorencio13@gmail.com>"]
 python = "^3.9"
 Django = "3.2.8"
 django-mptt = "^0.13.4"
+Pillow = "^9.2.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
