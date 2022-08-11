@@ -160,7 +160,7 @@ cython_debug/
 #.idea/
 
 ############
-script.txt
+scripts.txt
 ############
 
 # Django #
