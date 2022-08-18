@@ -14,5 +14,4 @@ Como tambem alguns frameworks/libs interessantes, como por exemplo:
 - FactoryBoy
 - Faker
 - Selenium
-- webdriver-manager
 - dynconf

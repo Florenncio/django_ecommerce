@@ -33,6 +33,4 @@ NAME = "django.contrib.auth.password_validation.CommonPasswordValidator"
 [[development.AUTH_PASSWORD_VALIDATORS]]
 NAME = "django.contrib.auth.password_validation.NumericPasswordValidator"
 
-[development.DATABASES.default]
-ENGINE = "django.db.backends.sqlite3"
-NAME = "/home/florenncio/repositorio/ecommerce_django/db.sqlite3"
+[development.DATABASES.default] # Defined in .secrets.toml
