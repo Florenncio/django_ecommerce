@@ -2,16 +2,18 @@
 
 *Construindo um Ecommerce... 🛠*
 
-Alguns conceito foram aplicados nesses projetos, tais como:
+Conceito aplicados nesse projeto:
 
-- TDD (Test-driven Development)
-- 12 Factore App
+- Test-driven Development or TDD *(book: Database Design for Mere Mortals)*
+- [12 Factore App](https://12factor.net/)
 
-Como tambem alguns frameworks/libs interessantes, como por exemplo:
+Frameworks, ferramentas e bibliotecas utilizadas:
 
-- **Django**
-- pytest
-- FactoryBoy
-- Faker
-- Selenium
-- dynconf
+- [**Django**](https://www.djangoproject.com/)
+- [**Bootstrap 5**](https://getbootstrap.com/)
+- **PostgreSQL with Docker**
+- [pytest](https://docs.pytest.org/)
+- [FactoryBoy](https://factoryboy.readthedocs.io/en/stable/)
+- [Faker](https://faker.readthedocs.io/en/master/)
+- [Selenium](https://selenium-python.readthedocs.io/)
+- [dynconf](https://www.dynaconf.com/)

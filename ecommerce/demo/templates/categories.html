@@ -2,38 +2,64 @@
 
 {% block content %}
 
-    <div class="row">
-        <ul class="collection with-header">
-            <li class="collection-header"><h4>Categories</h4></li>
-            {% for i in page_obj %}
-                <li class="collection-item">{{i.name|upper}}<a href="{% url 'demo:product_by_category' category=i.slug %}" class="secondary-content"><i class="material-icons">send</i></a></li>
-            {% endfor %}
-        </ul>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col col-sm-6">
+                <p class="text-start fs-3">Categorias</p>
+            </div>
+
+            <div class="col col-sm-6">
+                <p class="text-end fw-light">{{ page_obj.start_index}}-{{ page_obj.end_index }} de {{ num_category }}</p>
+            </div>
+        </div>
     </div>
 
-    <div class="row center">
-        <ul class="pagination">
+    
+
+    <div class="container-fluid">
+        <div class="list-group"> 
+            {% for i in page_obj %}
+                <a {% if i.product__count > 0 %} class="list-group-item list-group-item-action" href="{% url 'demo:product_by_category' category=i.slug %}" {% else %}  class="list-group-item list-group-item-action disabled" href=""{% endif %} >
+                    <div class="d-flex w-100 justify-content-between">
+                        <h6 class="mb-1">{{i.name|upper}}</h6>
+                        <span class="badge bg-primary rounded-pill">{{ i.product__count }}</span>
+                    </div>
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+
+    <nav class="container-fluid">
+        <ul class="pagination justify-content-center m-3">
             
             {% if page_obj.has_previous %}
-                <li class="waves-effect"><a href="?page={{page_obj.previous_page_number}}"><i class="material-icons">chevron_left</i></a></li>
+                <li class="page-item">
+                    <a class="page-link" href="?page={{page_obj.previous_page_number}}"><span aria-hidden="true">&laquo;</span></a>
+                </li>
             {% else %}
-                <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
+                <li class="page-item desable">
+                    <a class="page-link" href=""><span aria-hidden="true">&laquo;</span></a>
+                </li>
             {% endif %}
             
             {% for i in page_obj.paginator.page_range %}
-                <li {% if page_obj.number == i %} class="active" {% else %} class="waves-effect" {% endif %}>
-                    <a href="?page={{i}}">{{i}}</a>
+                <li {% if page_obj.number == i %} class="page-item active" {% else %} class="page-item" {% endif %}>
+                    <a class="page-link" href="?page={{i}}">{{i}}</a>
                 </li>
             {% endfor %}
 
             {% if page_obj.has_next %}
-                <li class="waves-effect"><a href="?page={{page_obj.next_page_number}}"><i class="material-icons">chevron_right</i></a></li>
+                <li class="page-item">
+                    <a class="page-link" href="?page={{page_obj.next_page_number}}"><span aria-hidden="true">&raquo;</span></a>
+                </li>
             {% else %}
-                <li class="disabled"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
-            {% endif %}
-            
+                <li class="page-item">
+                    <a class="page-link" href=""><span aria-hidden="true">&raquo;</span></a>
+                </li>
+            {% endif %}   
         </ul>
-    </div>
+    </nav>
 
 
 {% endblock content %}

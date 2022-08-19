@@ -1,46 +1,61 @@
 {% extends 'base.html' %}
 
 {% block content %}
+    
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col col-sm-6">
+                <p class="fs-4 fw-semibold text-start">{{ category|upper }}</p>
+            </div>
+            <div class="col col-sm-6">
+                <p class="text-end fw-light">{{ page_obj.start_index}}-{{ page_obj.end_index }} de {{ num_product }}</p>
+            </div>
+        </div>
+    </div>
 
     <div class="row">
         {% for i in page_obj %}
-            <div class="card">
-                <div class="card-image waves-effect waves-block waves-light">
-                    <img class="activator" src="">
-                </div>
-                <div class="card-content">
-                    <span class="card-title activator grey-text text-darken-4">{{ i.name|upper }}<i class="material-icons right">more_vert</i></span>
-                </div>
-                <div class="card-reveal">
-                    <span class="card-title grey-text text-darken-4"><i class="material-icons right">close</i>{{ i.name|upper }}</span>
-                    <p>{{ i.description }}</p>
+            <div class="col col-sm-3 col-lg-2">
+                <div class="card border m-3">
+                    <img class="card-img-top" src="https://mapbiomas.org/assets/camaleon_cms/image-not-found-4a963b95bf081c3ea02923dceaeb3f8085e1a654fc54840aac61a57a60903fef.png">
+                    <div class="card-body">
+                        <p class="card-title fs-6 lh-1">{{ i.name|slice:":14"|upper }}</p>
+                        <p class="card-text text-decoration-underline">R$ {{ i.product__store_price }}</p>
+                    </div>
                 </div>
             </div>
         {% endfor %}
     </div>
 
-    <div class="row center">
-        <ul class="pagination">
+    <nav class="">
+        <ul class="pagination justify-content-center m-3">
             
             {% if page_obj.has_previous %}
-                <li class="waves-effect"><a href="?page={{page_obj.previous_page_number}}"><i class="material-icons">chevron_left</i></a></li>
+                <li class="page-item">
+                    <a class="page-link" href="?page={{page_obj.previous_page_number}}"><span aria-hidden="true">&laquo;</span></a>
+                </li>
             {% else %}
-                <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
+                <li class="page-item desable">
+                    <a class="page-link" href=""><span aria-hidden="true">&laquo;</span></a>
+                </li>
             {% endif %}
             
             {% for i in page_obj.paginator.page_range %}
-                <li {% if page_obj.number == i %} class="active deep-purple darken-3" {% else %} class="waves-effect" {% endif %}>
-                    <a href="?page={{i}}">{{i}}</a>
+                <li {% if page_obj.number == i %} class="page-item active" {% else %} class="page-item" {% endif %}>
+                    <a class="page-link" href="?page={{i}}">{{i}}</a>
                 </li>
             {% endfor %}
 
             {% if page_obj.has_next %}
-                <li class="waves-effect"><a href="?page={{page_obj.next_page_number}}"><i class="material-icons">chevron_right</i></a></li>
+                <li class="page-item">
+                    <a class="page-link" href="?page={{page_obj.next_page_number}}"><span aria-hidden="true">&raquo;</span></a>
+                </li>
             {% else %}
-                <li class="disabled"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
-            {% endif %}
-            
+                <li class="page-item">
+                    <a class="page-link" href=""><span aria-hidden="true">&raquo;</span></a>
+                </li>
+            {% endif %}   
         </ul>
-    </div>
+    </nav>
 
 {% endblock content %}
