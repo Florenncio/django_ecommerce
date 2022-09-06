@@ -1,10 +1,11 @@
 import pytest
-from selenium.webdriver.common.by import By
 from django.contrib.auth.models import User
+from selenium.webdriver.common.by import By
+
 
 @pytest.mark.selenium
-def test_dashboard_admin_login (live_server, db_fixture_setup, chrome_browser_instance):
-    
+def test_dashboard_admin_login(live_server, db_fixture_setup, chrome_browser_instance):
+
     i = User.objects.get(id=1)
     print(i.password)
 

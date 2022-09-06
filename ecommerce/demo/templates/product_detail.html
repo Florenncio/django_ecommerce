@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+        <div class="col col-sm-6">
+            <nav class="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'demo:home' %}">HOME</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'demo:category' %}">CATEGORIAS</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'demo:product_by_category' category=obj.product__category__slug %}">{{ obj.product__category__name|upper }}</a></li>
+                </ol>
+            </nav>
+        </div>
+        </div>
+        <div class="row">
+        <div class="col col-sm-6">
+            <p class="display-5 text-start fw-bold">{{ obj.product__name|upper }}</p>
+            <p class="fs-6 text-start fw-lighter">SKU: {{ obj.sku }}</p>
+        </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row m-3">
+            <div class="col col-sm-6">
+                <img src="https://mapbiomas.org/assets/camaleon_cms/image-not-found-4a963b95bf081c3ea02923dceaeb3f8085e1a654fc54840aac61a57a60903fef.png" class="rounded float-start" alt="...">
+            </div>
+            <div class="col col-sm-6">
+                <p class="display-6 fw-bolder">R$ {{ obj.store_price }}</p>
+                <p>Peso: {{ obj.weight }}g</p>
+                <p>Marca: {{ obj.brand__name|upper }}</p>
+                <div class="col col-sm-12">
+                {% for i in type_attr %}
+                    <p class="mb-2">{{i.product_attribute__name|upper}}:</p>
+                    {% for j in inventory_attr %}
+                        {% if j.attribute_values__product_attribute__name == i.product_attribute__name %}    
+                            <div class="btn-group" role="group" aria-label="Basic example">
+                            {% if j.attribute_values__attribute_value in obj.field_a %}
+                                <button type="button" id="target-{{j.attribute_values__attribute_value}}" class="selected btn btn-outline-dark active" data-attribute="{{i.product_attribute__name}}" value="{{j.attribute_values__attribute_value}}">{{ j.attribute_values__attribute_value|upper }}</button>
+                            {% else %}
+                                <button type="button" id="target-{{j.attribute_values__atribute_value}}" class="btn btn-outline-dark" data-attribute="{{i.product_attribute__name}}" value="{{j.attribute_values__attribute_value}}">{{ j.attribute_values__attribute_value|upper }}</button>                                
+                            {% endif %}
+                            </div>                          
+                        {% endif %}
+                    {% endfor %} 
+                {% endfor %}
+                </div>
+                <div class="d-grid gap-2 mt-4">
+                    <button class="btn btn-success btn-lg">COMPRAR</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var d = {}
+
+        let textBoxes = document.querySelectorAll('[id^=target]');
+
+        let e = 0
+        let f = textBoxes.length
+
+        for (let i in textBoxes) {
+            if (e < f) {
+            if (textBoxes[i].classList.contains("selected")) {
+                d[textBoxes[i].getAttribute('data-attribute')] = textBoxes[i].getAttribute('value')
+            }
+            } else {
+            break
+            }
+            e++
+        }
+
+        document.addEventListener('click', function(e) {
+        let value = e.target.getAttribute('value');
+        d[e.target.getAttribute('data-attribute')] = e.target.getAttribute('value')
+        let querystring = buildUrlWithParams(d)
+        let url = window.location.href.split('?')[0]
+        window.location.href = url + "?" + querystring;
+        }, false);
+
+
+
+        function buildUrlWithParams(data) {
+            var searchparams = [];
+            for (var d in data)
+            searchparams.push(d + '=' + data[d]);
+            return searchparams.join('&');
+        }
+    </script>
+
+{% endblock content %}
+

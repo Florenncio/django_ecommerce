@@ -11,6 +11,8 @@ django-mptt = "^0.13.4"
 Pillow = "^9.2.0"
 dynaconf = "^3.1.9"
 psycopg2-binary = "^2.9.3"
+black = "^22.8.0"
+isort = "^5.10.1"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"

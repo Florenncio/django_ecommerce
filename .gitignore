@@ -300,3 +300,5 @@ GitHub.sublime-settings
 .history
 # Ignore dynaconf secret files
 .secrets.*
+
+delete_migrations.sh
